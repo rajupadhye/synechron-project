@@ -1,0 +1,23 @@
+---
+-
+  name: This playbook is for Jenkins and Ansible project
+  hosts: "all"
+
+  tasks:
+    -
+      name: Installing apache webserver
+      yum:
+        name: httpd
+        state: present
+
+    -
+      name: Configuring web page
+      copy:
+        content: "<h1>This file has been created from a CI build of Jenkins using Ansible and changed now</h1>"
+        dest: /var/www/html/index.html
+
+    - 
+      name: Starting webserver services
+      service:
+        name: httpd
+        state: started
